@@ -7,8 +7,11 @@ const app = express();
 
 app.use(bodyParser.json());
 
+
 const postRouts = require('./routes/post');
-app.use('/posts', postRouts)
+const authRouts = require('./routes/authRoutes');
+app.use('/posts', postRouts);
+app.use('/auth', authRouts);
 
 // connect the mongoose database
 
