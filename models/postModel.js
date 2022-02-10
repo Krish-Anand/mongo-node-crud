@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-    title: {
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+    }],
+    productTitle: {
         type: String,
-        required: true
-    }, 
+        required: true,
+        unique: true
+    },
     description: {
         type: String,
         required: true
@@ -13,6 +18,7 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     }
+
 })
 
 module.exports = mongoose.model('Post', postSchema);
