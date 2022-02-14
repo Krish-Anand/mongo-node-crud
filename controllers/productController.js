@@ -6,7 +6,7 @@ const productList = async(req, res) => {
         const listProducts = await ProductModal.find()
         res.send(listProducts);
     } catch (err) {
-        res.send('Couldn`t connect the database')
+        res.send('Couldn`t connect the database');
     }
 }
 
@@ -15,7 +15,7 @@ const productUpdate = async(req, res) => {
         const updatedProducts = await ProductModal.updateOne({ _id: req.params.productID }, { $set: { products: req.body.products } })
         res.send(updatedProducts);
     } catch (err) {
-        res.send('Couldn`t connect the database')
+        res.send('Couldn`t connect the database');
     }
 }
 
@@ -24,7 +24,7 @@ const productDelete = async(req, res) => {
         const deletedProducts = await ProductModal.deleteOne({ _id: req.params.productID })
         res.send(deletedProducts);
     } catch (err) {
-        res.send('Couldn`t connect the database')
+        res.send('Couldn`t connect the database');
     }
 }
 

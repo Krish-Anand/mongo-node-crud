@@ -1,9 +1,10 @@
 const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/authModel');
+const sendMailer = require('../helpers/sendMailer');
 const { registrationValidation, loginValidation } = require('../helpers/authValidation');
 
-const loginController = async(req, res) => {
+const registerController = async(req, res) => {
 
     // Lets validate the data before the users
     const { error } = registrationValidation(req.body)
@@ -23,14 +24,15 @@ const loginController = async(req, res) => {
         password: hashedPassword
     })
     try {
-        const savedDetails = await user.save()
+        const savedDetails = await user.save();
+        sendMailer(req.body.email);
         res.send(savedDetails);
     } catch (err) {
         res.json({ message: err, status: err.status })
     }
 }
 
-const registerController = async(req, res) => {
+const loginController = async(req, res) => {
     // Checking the username and password validation here
     const { error } = loginValidation(req.body)
     if (error) return res.status(400).send(error.details[0].message);
